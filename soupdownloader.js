@@ -1,13 +1,22 @@
 
 var fs = require('fs'),
 	lazy = require('lazy'),
-	async = require ('async');
+	async = require ('async'),
+	http = require('http');
 
 var count = 0,
 	countsearch = 0,
-	stream = fs.createReadStream('./soup_falk_2013-01-03.rss');
+	stream = fs.createReadStream('./soup_falk_2013-01-03.rss'),
+	options = {};
 
 var parralelDLs = 2; // how many pictures will be downloaded in parralel - adjust to soup speed of the day and you connection speed
+
+var path = './soupImages/'; 
+
+if (!fs.existsSync(path)) {
+	console.log('Creating Directory: ' + path);
+	fs.mkdirSync(path);
+};
 
 
 // take apart the rsscode line 
@@ -21,10 +30,30 @@ function downloader(task, callback){
  	if (soupline != null) {
  		var souplineOBJ = JSON.parse(soupline[1]);
 	   		if ("url" in souplineOBJ){
-				setTimeout(function(){
-					console.log('LINE: ' + souplineOBJ.url);
-					callback();
-				}, 1000);  			
+	   			var souplineURLArray = souplineOBJ.url.split("/");
+	   			console.log(souplineOBJ.url.split("/"));
+	   			options = {
+	   				host: souplineURLArray[2],
+	   				port: 80,
+	   				path: '/' + souplineURLArray[3] + '/' + souplineURLArray[4] + '/' + souplineURLArray[5]
+	   			}
+				var request = http.get(options, function(res){
+	   				var imagedata = '';
+	    			res.setEncoding('binary');
+
+	    			res.on('data', function(chunk){
+	        			imagedata += chunk;
+	    			});
+
+	    			res.on('end', function(){
+	    				console.log("respnsoe ends", res)
+	        			fs.writeFile(path + '/' + souplineURLArray[5], imagedata, 'binary', function(err){
+	            			if (err) throw err;
+	            			console.log('File saved.');
+	            			callback();
+	        			});
+	   				 });
+				});		
 			} else {
   				callback();
   			};
@@ -33,14 +62,18 @@ function downloader(task, callback){
   	};
 };
 
+
+
+
 // initialize the process and download queue 
-// 
+
 var q = async.queue(function (task, callback) {
     console.log('hello ' + task.id);
    	downloader(task, callback);
 }, parralelDLs);
 
 //push a new line into the queue to be processed 
+
 function processRssLine(line){
 	count++;
 	q.push({id: count.toString(), line: line}, function(err){
@@ -49,6 +82,7 @@ function processRssLine(line){
 };
 
 // if the queue gets empty resume the filestream 
+
 q.empty = function(){
 	console.log("NEW BATCH");
 	stream.resume();
