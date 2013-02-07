@@ -1,0 +1,43 @@
+# SublimeText files
+*.sublime-workspace
+*.sublime-project
+
+# TextMate files
+*.tmproj
+*.tmproject
+tmtags
+
+# OSX Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# OSX Thumbnails
+._*
+
+# OSX Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Windows folder config file
+Desktop.ini
+
+# Windows recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Node Modules
+node_modules/
+
+# compiles css file
+/public/stylesheets/*.css
+
+# log files
+*.log
+
+# the rss file
+*.rss
