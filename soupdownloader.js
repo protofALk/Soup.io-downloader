@@ -22,7 +22,7 @@ if (!fs.existsSync(path)) {
 
 
 function cleverMetadataGenerator(souplineOBJ){
-	console.log(souplineOBJ);
+	//console.log(souplineOBJ);
 	var sourceArray = new Array(),
 		mainURLArray = new Array(),
 		originalName = '',
@@ -38,9 +38,9 @@ function cleverMetadataGenerator(souplineOBJ){
 		var mainURLName = mainURLArray[mainURLArray.length-2];
 		var regex = new RegExp('%..','gi');
 		var originalName = sourceArray[sourceArray.length-1].split('.')[0].replace(regex,'');
-		console.log(originalName);
-		console.log(mainURLName + '-' + originalName);
-		console.log(stringedsouplineOBJ);
+		//console.log(originalName);
+		//console.log(mainURLName + '-' + originalName);
+		//console.log(stringedsouplineOBJ);
 		return {
 			filename: mainURLName + '-' + originalName,
 			stringedSoup: stringedsouplineOBJ
@@ -82,7 +82,7 @@ function downloader(task, callback){
 	   				path: '/' + souplineURLArray[3] + '/' + souplineURLArray[4] + '/' + souplineURLArray[5]
 	   			};
 	   			var fileext = souplineURLArray[5].split('.')[souplineURLArray[5].split('.').length-1]
-	   			console.log(fileext);
+	   			//console.log(fileext);
 				var request = http.get(options, function(res){
 	   				var imagedata = '';
 	    			res.setEncoding('binary');
@@ -96,7 +96,7 @@ function downloader(task, callback){
 	    				//console.log(imagedata.toString())
 	    				//write the file 
 	    				var fullpath = path + '/' + metadata.filename + '_' +  souplineURLArray[5].split('.')[0];
-	    				console.log(new Buffer(imagedata).toString('utf16le',1,1000));
+	    				//console.log(new Buffer(imagedata).toString('utf16le',1,1000));
 	        			fs.writeFile(fullpath + '.' + fileext, imagedata, 'binary', function(err){
 	            			if (err) throw err;
 	            			if (writeMeta = true) {
@@ -127,7 +127,7 @@ function downloader(task, callback){
 // initialize the process and download queue 
 
 var q = async.queue(function (task, callback) {
-    console.log('hello ' + task.id);
+    //console.log('Processing task: ' + task.id);
    	downloader(task, callback);
 }, parralelDLs);
 

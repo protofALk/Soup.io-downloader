@@ -41,3 +41,6 @@ node_modules/
 
 # the rss file
 *.rss
+
+# Soup Images from my Testing	
+/soupImages
