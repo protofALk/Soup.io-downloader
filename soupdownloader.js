@@ -6,13 +6,14 @@ var fs = require('fs'),
 
 var count = 0,
 	souppiccounter = 0,
-	stream = fs.createReadStream('./soup_falk_2013-01-03.rss'),
+	soupRSSfilpath = './soup_falk_2013-01-03.rss', // change to reflect yours
+	stream = fs.createReadStream(soupRSSfilpath),
 	options = {},
 	lastTitle = '',
-	metaData = true;
+	metaData = true; // if you want a metadatafile to each image from the soup info
 
 var parralelDLs = 2; // how many pictures will be downloaded in parralel - adjust to soup speed of the day and you connection speed
-var path = './soupImages/'; 
+var path = './soupImages/'; // change to reflect yours 
 
 // first we check if path exists if it does not we create it - this is synchronous as without a path there is no saving a picture
 if (!fs.existsSync(path)) {
@@ -20,7 +21,7 @@ if (!fs.existsSync(path)) {
 	fs.mkdirSync(path);
 };
 
-
+// some extracting and formating of stuff we found in the rss file - not much but at least a source and some tags and stuff
 function cleverMetadataGenerator(souplineOBJ){
 	//console.log(souplineOBJ);
 	var sourceArray = new Array(),
