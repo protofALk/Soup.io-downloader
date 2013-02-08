@@ -1,11 +1,14 @@
 # What is Soup.IO Downloader
 
 A node.js programm to download all your images from your Soup.IO RSS feed to a local harddrive. Optionally you can also save some metadata in a textfile for each image (like the original source of the image). 
+## Download 
 
+1.  App for OSX [here](https://github.com/protofALk/Soup.io-downloader/blob/master/soupiodownloaderPackage/SoupDownloader.app.zip)
+2.  for node version just download the soudownloader.js above
 
 ## Get your rss first
 
-To get your own RSS file go to your Soup, login and under "options" export RSS. It will take between a while and a LONG time depending on how big your Soup is - but you will be rewarded with a really nice RSS feed that stores the pathes to your images and the orinigal source links and not much else. 
+To get your own RSS file go to your Soup, login and under "options" then under "privacy" click on export RSS. It will take between a while and a LONG time depending on how big your Soup is - but you will be rewarded with a really nice RSS feed that stores the pathes to your images and the orinigal source links and not much else. 
 
 ## How to run
 
