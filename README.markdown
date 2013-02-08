@@ -8,8 +8,10 @@ A node.js programm to download all Pictures from a Soup.IO RSS feed and puts the
 To get your own RSS file go to your Soup, login and under "options" export RSS. It will take between a while and a LONG time depending on how big your Soup is - but you will be rewarded with a really nice RSS feed that stores the pathes to your images and the orinigal source links (and a whole bunch of other stuff that I am not including)
 
 ## How to run
-You can get the a prepackaged App for OSX [here](https://github.com/)
-Just launch with double click to start. Then 
+You can get the a prepackaged App for OSX [here](https://github.com/protofALk/Soup.io-downloader/blob/master/soupiodownloaderPackage/SoupDownloader.app.zip).
+Just unpack -> launch with double click to start. 
+
+Then: 
 
 1.  choose your downloaded RSS file
 2.  choose the folder you want to save the images in
@@ -17,7 +19,7 @@ Just launch with double click to start. Then
 4.  leave the concurrent download number alone if you don´t want to break the interwebs 
 	(so if Soup feels fast on the day and you are on a fast connection you might go higher, if it connection hangs too long quit restart do 1-4 again and set a lower number here)
 
-command shell if you have node installed: 
+command shell if you have node installed (download just the soupdownloader.js in the main directory): 
 
 The programm takes two arguments 
 
