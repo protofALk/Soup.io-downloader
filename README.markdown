@@ -1,6 +1,6 @@
 # What is Soup.IO Downloader
 
-A node.js programm to download all Pictures from a Soup.IO RSS feed and puts the original source into the metadata of the picture. 
+A node.js programm to download all your images from your Soup.IO RSS feed to a local harddrive. Optionally you can also save some metadata in a textfile for each image (like the original source of the image). 
 
 
 ## Get your rss first
