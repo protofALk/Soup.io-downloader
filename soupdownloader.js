@@ -3,17 +3,17 @@ var fs = require('fs'),
 	lazy = require('lazy'),
 	async = require ('async'),
 	http = require('http');
-console.log (process.argv);
+
 var count = 0,
 	souppiccounter = 0,
-	soupRSSfilpath = process.argv[3], //'./soup_falk_2013-01-03.rss', // change to reflect yours
+	soupRSSfilpath = process.argv[4], //'./soup_falk_2013-01-03.rss', // change to reflect yours
 	stream = fs.createReadStream(soupRSSfilpath),
 	options = {},
 	lastTitle = '',
-	metaData = process.argv[1]; // if you want a metadatafile to each image from the soup info
+	metaData = process.argv[2]; // if you want a metadatafile to each image from the soup info
 
-var parralelDLs = process.argv[2]; // how many pictures will be downloaded in parralel - adjust to soup speed of the day and you connection speed
-var path = process.argv[4]; // './soupImages/'; // change to reflect yours 
+var parralelDLs = process.argv[3]; // how many pictures will be downloaded in parralel - adjust to soup speed of the day and you connection speed
+var path = process.argv[5]; //'./soupImages/'; // change to reflect yours 
 
 // first we check if path exists if it does not we create it - this is synchronous as without a path there is no saving a picture
 if (!fs.existsSync(path)) {
