@@ -5,7 +5,7 @@ A node.js programm to download all your images from your Soup.IO RSS feed to a l
 
 ## Get your rss first
 
-To get your own RSS file go to your Soup, login and under "options" export RSS. It will take between a while and a LONG time depending on how big your Soup is - but you will be rewarded with a really nice RSS feed that stores the pathes to your images and the orinigal source links (and a whole bunch of other stuff that I am not including)
+To get your own RSS file go to your Soup, login and under "options" export RSS. It will take between a while and a LONG time depending on how big your Soup is - but you will be rewarded with a really nice RSS feed that stores the pathes to your images and the orinigal source links and not much else. 
 
 ## How to run
 You can get the a prepackaged App for OSX [here](https://github.com/protofALk/Soup.io-downloader/blob/master/soupiodownloaderPackage/SoupDownloader.app.zip).
@@ -17,7 +17,7 @@ Then:
 2.  choose the folder you want to save the images in
 3.  if you want a metaInfo text file for ever image you can do that here
 4.  leave the concurrent download number alone if you don´t want to break the interwebs 
-	(so if Soup feels fast on the day and you are on a fast connection you might go higher, if it connection hangs too long quit restart do 1-4 again and set a lower number here)
+	(so if Soup feels fast on the day and you are on a fast connection you might go higher, if the connection hangs too long quit restart do 1-4 again and set a lower number here)
 
 command shell if you have node installed (download just the soupdownloader.js in the main directory): 
 
