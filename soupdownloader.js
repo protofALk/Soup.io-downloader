@@ -9,9 +9,19 @@ var count = 0,
 	soupRSSfilpath = process.argv[4], //'./soup_falk_2013-01-03.rss', // change to reflect yours
 	stream = fs.createReadStream(soupRSSfilpath),
 	options = {},
-	lastTitle = '',
-	metaData = process.argv[2]; // if you want a metadatafile to each image from the soup info
+	lastTitle = '';
 
+// if you want a metadatafile to each image from the soup info
+var writeMeta;
+if (process.argv[2] == 'false'){
+	writeMeta = false;
+}
+else {
+	writeMeta = true;
+}
+	
+	
+	
 var parralelDLs = process.argv[3]; // how many pictures will be downloaded in parralel - adjust to soup speed of the day and you connection speed
 var path = process.argv[5]; //'./soupImages/'; // change to reflect yours 
 
@@ -39,11 +49,13 @@ function cleverMetadataGenerator(souplineOBJ){
 		var mainURLName = mainURLArray[mainURLArray.length-2];
 		var regex = new RegExp('%..','gi');
 		var originalName = sourceArray[sourceArray.length-1].split('.')[0].replace(regex,'');
+		var newFileName = mainURLName + '-' + originalName;
+		newFileName = newFileName.replace(/\?|\/|\\|\:|"|<|>/g,'-');
 		//console.log(originalName);
 		//console.log(mainURLName + '-' + originalName);
 		//console.log(stringedsouplineOBJ);
 		return {
-			filename: mainURLName + '-' + originalName,
+			filename: newFileName,
 			stringedSoup: stringedsouplineOBJ
 		};
 	} else {
@@ -71,10 +83,11 @@ function downloader(task, callback){
  			if (lastTitle){
  				souplineOBJ.title = lastTitle;
  			}
-	   		if ("url" in souplineOBJ){
+	   		if ("url" in souplineOBJ && souplineOBJ.url != null){
 	   			souppiccounter++
-	   			var metadata = cleverMetadataGenerator(souplineOBJ);
-
+				
+				var metadata = cleverMetadataGenerator(souplineOBJ);
+				
 	   			var souplineURLArray = souplineOBJ.url.split("/");
 	   			// console.log(souplineOBJ.url.split("/"));
 	   			options = {
@@ -96,11 +109,13 @@ function downloader(task, callback){
 	    				//console.log("respnsoe ends", res.socket.parser._header)
 	    				//console.log(imagedata.toString())
 	    				//write the file 
-	    				var fullpath = path + '/' + metadata.filename + '_' +  souplineURLArray[5].split('.')[0];
+						
+						var fullpath = path + '/' + metadata.filename + '_' +  souplineURLArray[5].split('.')[0];
+						
 	    				//console.log(new Buffer(imagedata).toString('utf16le',1,1000));
 	        			fs.writeFile(fullpath + '.' + fileext, imagedata, 'binary', function(err){
 	            			if (err) throw err;
-	            			if (writeMeta = true) {
+	            			if (writeMeta) {
 	            			//write MetaData Text File
 		            			fs.writeFile(fullpath + '.txt', metadata.stringedSoup, 'utf8', function(err){
 		            				if (err) console.log(err.message);
